@@ -38,9 +38,9 @@
 (add-hook 'after-init-hook 'speedbar-config)
 (defun speedbar-config()
   (require 'sr-speedbar)
+  (setq speedbar-show-unknown-files t)
   (speedbar-add-supported-extension ".rkt")
   (setq sr-speedbar-right-side nil))
-
 
 ;; Go Evil
 (defun go-evil()
@@ -96,7 +96,7 @@
 ;; Quick edit dotemacs
 (defun dot()
   (interactive)
-  (find-file "~/dotfiles/emacs"))
+  (find-file "~/dotfiles/.emacs"))
 (global-set-key (kbd "s-.") 'dot)
 
 ;;Open dotemacs in lisp mode
@@ -112,4 +112,3 @@
 
 ;; Turn on autocomplete
 (add-hook 'after-init-hook (lambda () (global-auto-complete-mode t)))
-
