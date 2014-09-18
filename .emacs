@@ -4,7 +4,7 @@
 
             ;; Set color scheme and typeface
             (load-theme 'twilight-bright t)
-            (set-face-attribute 'default nil :font  "Inconsolata-14")
+            (set-face-attribute 'default nil :font  "Droid Sans Mono-12")
 
             ;; Frame Geometry
             (add-to-list 'initial-frame-alist '(width . 100))
@@ -32,7 +32,7 @@
 (defun scheme-mode-quack-hook ()
   (require 'quack))
 (add-hook 'after-init-hook 'scheme-mode-quack-hook)
-
+(global-set-key (kbd "s-r") 'run-racket)
 
 ;; Speedbar Modifications
 (add-hook 'after-init-hook 'speedbar-config)
@@ -52,6 +52,9 @@
   (define-key evil-normal-state-map "t" 'evil-previous-line)
   (define-key evil-normal-state-map "n" 'evil-forward-char)
   (define-key evil-normal-state-map "s" 'evil-backward-char)
+
+  (define-key evil-normal-state-map "N" 'other-window)
+  (define-key evil-motion-state-map "N" 'other-window)
 
   (define-key evil-visual-state-map "h" 'evil-next-line)
   (define-key evil-visual-state-map "t" 'evil-previous-line)
@@ -93,18 +96,31 @@
 
 (add-hook 'emacs-startup-hook 'go-evil)
 
+;; Helm Commands
+(add-hook 'after-init-hook 'helm-hook)
+(defun helm-hook()
+  (require 'helm-files)
+  (global-set-key (kbd "s-t") 'helm-for-files)
+  (setq helm-locate-command "mdfind -name %s %s")
+  )
+
+
 ;; Quick edit dotemacs
 (defun dot()
   (interactive)
   (find-file "~/dotfiles/.emacs"))
+
 (global-set-key (kbd "s-.") 'dot)
+(global-set-key (kbd "s-o") 'find-file)
+(global-set-key (kbd "s-n") 'next-buffer)
+(global-set-key (kbd "s-h") 'previous-buffer)
 
 ;;Open dotemacs in lisp mode
 (add-to-list 'auto-mode-alist '("\\emacs\\'" . lisp-mode))
 
 ;; Window modifications
 (global-set-key (kbd "s-1") 'delete-other-windows)
-(global-set-key (kbd "s-b") 'sr-speedbar-toggle)
+(global-set-key (kbd "s-l") 'sr-speedbar-toggle)
 
 ;; Turn on InteractivelyDoThings
 (require 'ido)
@@ -112,3 +128,29 @@
 
 ;; Turn on autocomplete
 (add-hook 'after-init-hook (lambda () (global-auto-complete-mode t)))
+
+;; Emacs Frame title
+(setq frame-title-format
+      '("%S" (buffer-file-name "%f"
+                               (dired-directory dired-directory "%b"))))
+
+;; Get path from shell
+(add-hook 'after-init-hook (lambda() 
+                             (exec-path-from-shell-initialize)))
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(helm-selection ((t (:background "#b5ffd1"))))
+ '(helm-source-header ((t (:background "#fff" :foreground "black" :weight bold :height 4 :family "Helvetica")))))
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(quack-fontify-style nil)
+ '(quack-remap-find-file-bindings-p nil))
+
+(add-hook 'after-init-hook #'global-flycheck-mode)
