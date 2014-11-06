@@ -4,10 +4,6 @@
 (load "~/dotfiles/org-clojure.el")
 (load "~/dotfiles/org-mode.el")
 
-;; Org Mode modifications
-;; fontify code in code blocks
-(setq org-src-fontify-natively t)
-
 ;; Add Package Sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -124,26 +120,6 @@
 (add-hook 'after-init-hook (lambda() 
                              (exec-path-from-shell-initialize)))
 
-
-;;(custom-set-faces
-;; custom-set-faces was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
-;; '(helm-selection ((t (:background "#b5ffd1"))))
-;; '(helm-source-header ((t (:background "#fff" :foreground "black" :weight bold :height 4 :family "Helvetica")))))
-;; (custom-set-variables
-;; custom-set-variables was added by Custom.
-;; If you edit it by hand, you could mess it up, so be careful.
-;; Your init file should contain only one such instance.
-;; If there is more than one, they won't work right.
-;; '(custom-safe-themes (quote ("cea6d15a8333e0c78e1e15a0524000de69aac2afa7bb6cf9d043a2627327844e" default)))
-
-;;'(org-agenda-files (quote ("~/Dropbox/ncl-stage-3/Log.org" "~/Dropbox/ncl-stage-3/README.org")))
-;;'(quack-fontify-style nil)
-;;'(quack-remap-find-file-bindings-p nil))
-
-
 (add-hook 'after-init-hook (lambda ()
                              (smartparens-global-mode 1)
                              (define-key sp-keymap (kbd "s-<left>") 'sp-backward-slurp-sexp)
@@ -162,9 +138,21 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files (quote ("~/Dropbox/ncl-stage-3/Log.org"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
+
+;; (custom-set-faces
+;; custom-set-faces was added by Custom.
+;; If you edit it by hand, you could mess it up, so be careful.
+;; Your init file should contain only one such instance.
+;; If there is more than one, they won't work right.
+;; '(helm-selection ((t (:background "#b5ffd1"))))
+;; '(helm-source-header ((t (:background "#fff" :foreground "black" :weight bold :height 4 :family "Helvetica")))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(quack-fontify-style nil)
+ '(quack-remap-find-file-bindings-p nil))
+
+(add-hook 'after-init-hook 'global-flycheck-mode)
