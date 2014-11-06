@@ -77,17 +77,24 @@ Open emacs in Lisp Mode
 * Features
 
 ** Autofill
+#+begin_src elisp
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 (add-hook 'org-mode-hook 'turn-on-auto-fill)
+#+end_src
 
 ** InteractivelyDoThings
+#+begin_src elisp
 (require 'ido)
 (ido-mode t)
+#+end_src
 
 ** Autocomplete
+#+begin_src elisp
 (add-hook 'after-init-hook (lambda () (global-auto-complete-mode t)))
+#+end_src
 
 ** Smartparens
+#+begin_src elisp
 (add-hook 'after-init-hook (lambda ()
 (smartparens-global-mode 1)
 (define-key sp-keymap (kbd "s-<left>") 'sp-backward-slurp-sexp)
@@ -95,20 +102,28 @@ Open emacs in Lisp Mode
 (define-key sp-keymap (kbd "s-M-<left>") 'sp-forward-barf-sexp)
 (define-key sp-keymap (kbd "s-M-<right>") 'sp-forward-barf-sexp)
 (require 'smartparens-config)))
+#+end_src
 
 ** Flycheck
+#+begin_src elisp
 (add-hook 'after-init-hook 'global-flycheck-mode)
+#+end_src
 
 * Emacs Frame title
+#+begin_src elisp
   (setq frame-title-format
   '("%S" (buffer-file-name "%f"
   (dired-directory dired-directory "%b"))))
+#+end_src
 
 * Get path from shell
+#+begin_src elisp
   (add-hook 'after-init-hook (lambda() 
   (exec-path-from-shell-initialize)))
+#+end_src
 
-
+* Custom Variables
+#+begin_src elisp
 (custom-set-variables
 '(org-agenda-files (quote ("~/Dropbox/ncl-stage-3/Log.org"))))
 
@@ -119,4 +134,4 @@ Open emacs in Lisp Mode
 ;; If there is more than one, they won't work right.
 ;; '(helm-selection ((t (:background "#b5ffd1"))))
 ;; '(helm-source-header ((t (:background "#fff" :foreground "black" :weight bold :height 4 :family "Helvetica")))))
-
+#+end_src
